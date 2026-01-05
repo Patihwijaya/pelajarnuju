@@ -7,9 +7,8 @@
     <title>{{ $title ?? 'Profil' }}</title>
     @vite('resources/css/app.css')
 </head>
-<body class="bg-gray-100 flex">
+<body class="bg-gray-100 flex relative">
     <x-navbar />
-    <x-navbar-user />
     <div class="max-w-3xl mx-auto mt-10 flex-1" >
         {{ $slot }}
     </div>

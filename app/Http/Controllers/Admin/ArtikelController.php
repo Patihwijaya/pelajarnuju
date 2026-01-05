@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Artikel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class ArtikelController extends Controller
 {
@@ -47,6 +48,7 @@ class ArtikelController extends Controller
         Artikel::create([
             'admin_id' => Auth::guard('admin')->id(),
             'judul' => $request->judul,
+            'slug' => Str::slug($request->judul),
             'isi' => $request->isi,
             'kategori' => $request->kategori,
             'penulis' => $request->penulis,
@@ -94,6 +96,7 @@ class ArtikelController extends Controller
 
         $artikel->update([
             'judul' => $request->judul,
+            'slug' => Str::slug($request->judul),
             'isi' => $request->isi,
             'kategori' => $request->kategori,
             'penulis' => $request->penulis,

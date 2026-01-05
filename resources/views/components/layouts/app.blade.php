@@ -5,16 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="{{ asset('asset/logoPelajarnuju.png') }}" type="image/png">
     <title>{{ $title ?? 'Website PC IPNU IPPNU' }}</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="//unpkg.com/alpinejs" defer></script>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    {{-- DEFAULT SEO --}}
+    <meta name="description" content="Website artikel dan informasi organisasi">
+    <meta name="robots" content="index, follow">
+
+    {{-- OPEN GRAPH & SEO --}}
+    @stack('meta')
+    @vite(["resources/css/app.css", "resources/js/app.js"])
 </head>
 <body class="bg-gray-100 flex flex-col min-h-screen">
     <x-navbar />
-    @auth
-    <x-header/>
-    @endauth
-    <main class="flex-1 px-5 mb-50 md:px-20 w-full mt-5">
+    <main class="flex-1 px-5 md:px-20 w-full mt-5 mb-5">
         <div id="global-loader" class="fixed inset-0 bg-white flex items-center justify-center z-9999 transition-opacity duration-500">
 
             <div class="animate-spin rounded-full h-14 w-14 border-4 border-gray-300 border-t-blue-600"></div>

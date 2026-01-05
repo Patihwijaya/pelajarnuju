@@ -82,12 +82,12 @@
                 @endif
             </div>
         </div>
-
         <div class="flex justify-end mt-6">
-            <button type="submit" class="bg-linear-to-r from-indigo-600 to-purple-600 text-white px-6 py-2 rounded-lg hover:opacity-90 transition">
+            <button type="submit" class="bg-green-800 text-white px-6 py-2 rounded-lg hover:opacity-90 transition">
                 Simpan Perubahan
             </button>
         </div>
+
     </form>
 </div>
 </x-layouts.app>

@@ -66,9 +66,10 @@ class UserProfilsController extends Controller
             'kecamatan' => 'nullable|string|max:225',
             'kelurahan' => 'nullable|string|max:225',
             'hobi' => 'nullable|string|max:225',
-            'sertifikat_kaderisasi' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:5120',
-            'foto_profil' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'sertifikat_kaderisasi' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:100000',
+            'foto_profil' => 'nullable|image|mimes:jpeg,png,jpg|max:10000',
         ]);
+        
 
         // ambil profil user
         $profil = UserProfil::firstOrCreate(
@@ -98,10 +99,10 @@ class UserProfilsController extends Controller
 
         // upload sertifikat
         if ($request->hasFile('sertifikat_kaderisasi')) {
-            $file = $request->file('sertifikat_kaderisasi');
-            $filename = time() . '_' . preg_replace('/[^A-Za-z0-9\-\_\.]/', '_', $file->getClientOriginalName());
-            $file->move(public_path('uploads/sertifikat_kaderisasi'), $filename);
-            $profil->sertifikat_kaderisasi = $filename;
+            $files = $request->file('sertifikat_kaderisasi');
+            $namaFile = time() . '_' . preg_replace('/[^A-Za-z0-9\-\_\.]/', '_', $files->getClientOriginalName());
+            $files->move(public_path('uploads/sertifikat_kaderisasi'), $namaFile);
+            $profil->sertifikat_kaderisasi = $namaFile;
         }
 
         // simpan ke database

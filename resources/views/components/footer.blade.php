@@ -1,5 +1,5 @@
-<footer class="w-full bg-gray-900 text-white flex flex-col md:flex-row gap-3 justify-between px-5 py-5 md:px-20 md:py-10">
-    <div class="w-full md:w-100">
+<footer class="w-full bg-gray-900 text-white flex flex-col md:flex-row gap-3 justify-between px-5 py-5 mt-50 md:px-20 md:py-10">
+    <div class="w-full md:w-1/2">
         <div class="flex items-center mb-5 w-full">
             <img src="{{ asset('asset/logoPelajarnuju.png') }}" alt="" class="w-20 h-20">
             <h1 class="text-lg md:text-2xl font-bold uppercase">Pelajarnuju</h1>

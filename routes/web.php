@@ -25,6 +25,7 @@ use App\Http\Controllers\User\KontakController;
 use App\Http\Controllers\Admin\KontakController as AdminKontakController;
 use App\Http\Controllers\PengajuanSkIpnuController;
 use App\Http\Controllers\Admin\AdminPengajuanSkIpnuController;
+use App\Http\Controllers\Admin\AdminPengajuanSkIppnuController;
 use App\Http\Controllers\PilihLoginController;
 use App\Http\Controllers\Admin\AdsController;
 use App\Models\Ads;
@@ -33,6 +34,9 @@ use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\Admin\AdminMaterialController;
 use App\Http\Controllers\Admin\KelasController;
 use App\Http\Controllers\Admin\MaterisController;
+use Illuminate\Support\Str;
+use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\PengajuanSkIppnuController;
 
 
 
@@ -47,7 +51,7 @@ Route::get('/profile', function () {
 Route::get('/sejarah', [UserProfilController::class, 'sejarah'])->name('user.sejarah');
 
 Route::get('/artikel', [UserArtikelController::class, 'index'])->name('user.artikel.index');
-Route::get('/artikel/{id}', [UserArtikelController::class, 'show'])->name('user.artikel.show');
+Route::get('/artikel/{slug}', [UserArtikelController::class, 'show'])->name('user.artikel.show');
 
 Route::get('/kegiatan', [UserKegiatanConroller::class, 'index'])->name('user.kegiatan.index');
 Route::get('/kegiatan/{id}', [UserKegiatanConroller::class, 'show'])->name('user.kegiatan.lihat');
@@ -81,9 +85,7 @@ Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admi
 // -----------------------------
 Route::middleware('auth:admin')->prefix('admin')->group(function () {
 
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('admin.dashboard');
+    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
 
     // Profil admin
     Route::resource('profil', ProfilController::class)->names('admin.profil');
@@ -107,6 +109,13 @@ Route::middleware('auth:admin')->prefix('admin')->group(function () {
     Route::get('/pengajuanSkIpnu', [AdminPengajuanSkIpnuController::class, 'index'])->name('admin.pengajuanSkIpnu.index');
     Route::get('/pengajuanSkIpnu/{id}', [AdminPengajuanSkIpnuController::class, 'show'])->name('admin.pengajuanSkIpnu.show');
     Route::post('/pengajuanSkIpnu/{id}/status', [AdminPengajuanSkIpnuController::class, 'updateStatus'])->name('admin.pengajuanSkIpnu.updateStatus');
+    Route::delete('/pengajuanSkIpnu/{id}', [AdminPengajuanSkIpnuController::class, 'destroy'])->name('admin.pengajuanSkIpnu.destroy');
+
+    // Pengajuan SK IPPNU Admin
+    Route::get('/pengajuanSkIppnu', [AdminPengajuanSkIppnuController::class, 'index'])->name('admin.pengajuanSkIppnu.index');
+    Route::get('/pengajuanSkIppnu/{id}', [AdminPengajuanSkIppnuController::class, 'show'])->name('admin.pengajuanSkIppnu.show');
+    Route::post('/pengajuanSkIppnu/{id}/status', [AdminPengajuanSkIppnuController::class, 'updateStatus'])->name('admin.pengajuanSkIppnu.updateStatus');
+    Route::delete('/pengajuanSkIppnu/{id}', [AdminPengajuanSkIppnuController::class, 'destroy'])->name('admin.pengajuanSkIppnu.destroy');
 
     // Kontak Admin
     Route::get('/kontak', [AdminKontakController::class, 'index'])->name('admin.kontak.index');
@@ -168,8 +177,14 @@ Route::middleware(['auth'])->group(function () {
     })->name('user.dashboard');
 
     Route::get('/ibadah', [IbadahConroller::class, 'index'])->name('ibadah.index');
+
+    // pengajuan SK IPNU
     Route::get('/pengajuanSkIpnu', [PengajuanSkIpnuController::class, 'create']);
     Route::post('/pengajuanSkIpnu', [PengajuanSkIpnuController::class, 'store']);
+
+    // pengajuan SK IPPNU
+    Route::get('/pengajuanSkIppnu', [PengajuanSkIppnuController::class, 'create']);
+    Route::post('/pengajuanSkIppnu', [PengajuanSkIppnuController::class, 'store']);
 
     // Route::get('/materials', [MaterialController::class, 'index'])->name('materi.index');
     // Route::get('/materials/{id}', [MaterialController::class, 'show'])->name('materi.show');

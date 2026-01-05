@@ -1,4 +1,4 @@
-<header class="bg-linear-to-br from-yellow-600 to-green-600 text-white py-4 shadow">
+<header class="bg-gray-700 text-white py-4 shadow">
     <div class="px-5 md:px-20 py-5 md:py-20">
         @php
         $sapa = Auth::user()->jenis_kelamin === 'Laki-laki' ? 'Rekan' : 'Rekanita';

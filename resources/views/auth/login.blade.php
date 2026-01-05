@@ -14,14 +14,14 @@
 <div class="bg-gray-500 h-screen flex">
     <div class="w-1/2 lg:w-2/3 relative hidden md:block">
         <img src="{{ asset('asset/bg.jpg') }}" alt="" class="w-full h-screen object-cover">
-        <div class="absolute top-20 left-5 w-80 lg:w-150 lg:left-30">
+        <div class="absolute top-0 left-5 w-80 lg:w-150 lg:left-10">
             <img src="{{ asset('asset/logoPelajarnuju.png') }}" alt="" class="w-50 h-50">
             <h1 class="text-lg lg:text-5xl text-white">Hallo</h1>
             <h1 class="text-lg lg:text-5xl  text-white mb-5">Rekan dan Rekanita! 👋</h1>
             <p class="text-md lg:text-md text-white">Selamat datang disitus resmi PC IPNU IPPNU Jakarta Utara, semoga hari mu menyenangkan!</p>
             <p class="text-sm text-white">Kembali ke <a href="/" class="underline font-semibold">Beranda</a></p>
         </div>
-        <span class="text-gray-500 absolute bottom-10 left-5 lg:left-30">@2025 Pelajarnuju. All rights reserved</span>
+        <span class="text-gray-500 absolute bottom-10 left-5 lg:left-10">@2025 Pelajarnuju. All rights reserved</span>
     </div>
 
     <form action="{{ route('login') }}" method="POST" class="bg-white p-6 w-full md:w-1/2 xl:w-1/3 flex flex-col relative justify-center gap-3">

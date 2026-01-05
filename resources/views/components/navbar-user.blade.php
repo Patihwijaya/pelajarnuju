@@ -1,4 +1,4 @@
-<aside class="w-100 bg-gray-100 text-black h-screen flex flex-col gap-5 absolute md:static -left-100">
+<aside class="w-100 bg-gray-100 text-black h-screen flex flex-col gap-5 absolute md:static -left-60">
     <div class="mt-20 ms-20">
         <p class="font-semibold text-lg uppercase">Pengaturan</p>
     </div>

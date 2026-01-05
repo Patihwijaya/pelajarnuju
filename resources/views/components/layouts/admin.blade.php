@@ -11,6 +11,8 @@
         <x-navbar-admin />
         <main class="ml-60 p-8 w-full overflow-y-auto">
             {{ $slot }}
+
+            @stack('scripts')
         </main>
     </body>
 </html>

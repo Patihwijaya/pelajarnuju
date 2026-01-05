@@ -15,7 +15,7 @@
         <p><strong>Hobi:</strong> {{ $user->profil->hobi ?? '-' }}</p>
     </div>
 
-    @if ($user->profil->foto_profil)
+    @if ($user->profil && $user->profil->foto_profil)
         <div class="mt-4">
             <strong>Foto Profil:</strong><br>
             <img src="{{ asset('uploads/foto_profil/' . $user->profil->foto_profil) }}" class="w-32 h-32 object-cover rounded-lg">
@@ -26,7 +26,7 @@
         </div>
     @endif
 
-    @if ($user->profil->sertifikat_kaderisasi)
+    @if ($user->profil && $user->profil->sertifikat_kaderisasi)
         <div class="mt-4">
             <strong>Sertifikat Kaderisasi:</strong><br>
             <a href="{{ asset('uploads/sertifikat_kaderisasi/' . $user->profil->sertifikat_kaderisasi) }}" target="_blank" class="text-blue-600 underline">Lihat Sertifikat</a>

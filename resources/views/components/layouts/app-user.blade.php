@@ -10,10 +10,15 @@
 </head>
 <body class="bg-gray-50 flex flex-col min-h-screen">
     <x-navbar />
+    @auth
+        @if (request()->routeIs('user.dashboard'))
+            <x-header />
+        @endif
+    @endauth
     <main class="flex-1 px-5 md:px-20 w-full mt-5">
         {{ $slot }}
     </main>
-    <x-footer/>
+
 
     <script>
         function updateClock() {

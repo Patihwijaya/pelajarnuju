@@ -63,6 +63,7 @@
                             <li><a href="/admin/kegiatan" class="block px-3 py-1.5 rounded hover:bg-gray-700">Kegiatan</a></li>
                             <li><a href="/admin/users" class="block px-3 py-1.5 rounded hover:bg-gray-700">User</a></li>
                             <li><a href="/admin/pengajuanSkIpnu" class="block px-3 py-1.5 rounded hover:bg-gray-700">Pengajuan SK</a></li>
+                            <li><a href="/admin/pengajuanSkIppnu" class="block px-3 py-1.5 rounded hover:bg-gray-700">Pengajuan SK IPPNU</a></li>
                             <li><a href="/admin/ads" class="block px-3 py-1.5 rounded hover:bg-gray-700">Ads</a></li>
                             <li><a href="/admin/materials" class="block px-3 py-1.5 rounded hover:bg-gray-700">Materi</a></li>
                             <li><a href="/admin/kelas" class="block px-3 py-1.5 rounded hover:bg-gray-700">Kelas</a></li>

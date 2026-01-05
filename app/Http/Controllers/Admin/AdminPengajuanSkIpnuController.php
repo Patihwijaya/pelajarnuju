@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\PengajuanSkIpnu;
 use Illuminate\Http\Request;
-use App\Notifications\StatusPengajuanSkIpnuNotification;
+use App\Notifications\StatusPengajuanSkNotification;
 use App\Models\User;
 
 class AdminPengajuanSkIpnuController extends Controller
@@ -37,12 +37,20 @@ class AdminPengajuanSkIpnuController extends Controller
 
         $user = $pengajuan->user; // pastikan relasi user ada
         if ($user) {
-            $user->notify(new \App\Notifications\StatusPengajuanSkIpnuNotification(
+            $user->notify(new \App\Notifications\StatusPengajuanSkNotification(
                 $pengajuan->status,
                 $pengajuan->catatan
             ));
         }
 
         return back()->with('succes', 'jawaban berhasil dikirm');
+    }
+
+    public function destroy($id)
+    {
+        $pengajuan = PengajuanSkIpnu::findOrFail($id);
+        $pengajuan->delete();
+
+        return redirect()->back()->with('success', 'Pengajuan SK berhasil dihapus');
     }
 }

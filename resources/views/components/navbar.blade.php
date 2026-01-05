@@ -104,7 +104,8 @@
                             x-trasition
                             class="absolute right-0 w-48 bg-white border border-gray-200 rounded-lg shadow-lg">
                             <a href="/dashboard" class="block md:hidden px-4 py-2 text-gray-700 hover:bg-gray-100">Dashboard</a>
-                            <a href="/profil" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Pengaturan</a>
+                            <a href="/profil" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Profil</a>
+                            <a href="/pengaturan" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Pengaturan</a>
 
                             <form method="POST" action="{{ route('user.logout') }}">
                                 @csrf
@@ -139,7 +140,7 @@
             <a href="/artikel" class="block py-2 text-gray-700 hover:text-green-600">Artikel</a>
             <a href="/kegiatan" class="block py-2 text-gray-700 hover:text-green-600">Kegiatan</a>
             <a href="/kontak" class="block py-2 text-gray-700 hover:text-green-600">Kontak</a>
-            <a href="/pilihlogin" class="block text-center px-4 py-2 mt-5 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">Login</a>
+            <a href="/login" class="block text-center px-4 py-2 mt-5 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">Login</a>
         </div>
 </nav>
 

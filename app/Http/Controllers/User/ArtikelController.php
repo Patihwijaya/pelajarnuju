@@ -15,16 +15,27 @@ class ArtikelController extends Controller
         return view('user.artikel', compact('artikels'));
     }
 
-    public function show($id)
+    public function show($slug)
     {
-        $artikels = Artikel::findOrfail($id);
+        $artikels = Artikel::where('slug', $slug)->firstOrFail();
         // $artikels->increment('lihats');
         $sessionKey = $artikels->id;
+        $shareUrl = url()->current();
+        $shareText = $artikels->judul;
+        $penulis = $artikels->penulis;
+
+        $shareImage = $artikels->gambar ? asset('uploads/artikel/' . $artikels->gambar) : null;
 
         if(!session()->has($sessionKey)) {
             $artikels->increment('lihats');
             session([$sessionKey => true]);
         }
-        return view('user.show', compact('artikels'));
+
+        if(!$artikels->slug){
+            $artikels->slug = \Illuminate\Support\Str::slug($artikels->judul);
+            $artikels->save();
+        }
+        return view('user.show', compact('artikels', 'shareUrl', 'shareText', 'shareImage', 'penulis'));
+        // return redirect()->route('user.artikel.show', $artikels->slug);
     }
 }

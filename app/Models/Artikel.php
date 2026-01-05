@@ -14,6 +14,7 @@ class Artikel extends Model
         'id',
         'admin_id',
         'judul',
+        'slug',
         'kategori',
         'isi',
         'penulis',
