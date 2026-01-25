@@ -36,7 +36,7 @@
                                 <td class="p-3 border">{{ $material->created_at->format('d M Y') }}</td>
                                 <td class="p-3 border">
                                     @if($material->file)
-                                        <a href="{{ asset('materials/'.$material->file) }}" target="_blank">
+                                        <a href="{{ asset('uploads/E-Book/'.$material->file) }}" target="_blank">
                                             Lihat File
                                         </a>
                                     @else

@@ -21,10 +21,10 @@
                 <h5 class="mt-4">File Materi:</h5>
 
                 @if($ext == 'pdf')
-                    <iframe src="{{ asset('materials/' . $material->file) }}" width="100%" height="600px"></iframe>
+                    <iframe src="{{ asset('uploads/E-Book/' . $material->file) }}" width="100%" height="600px"></iframe>
                 @endif
 
-                <a href="{{ asset('materials/' . $material->file) }}" class="btn btn-success mt-2" download>
+                <a href="{{ asset('uploads/E-Book/' . $material->file) }}" class="btn btn-success mt-2" download>
                     Download File
                 </a>
             @endif

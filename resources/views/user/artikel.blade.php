@@ -17,7 +17,7 @@
                 <p class="text-gray-700 mb-2"><strong>Penulis : </strong> {{ $artikel->penulis }}</p>
                 <p class="text-gray-700 line-clamp-3 md:hidden">{{ Str::limit(strip_tags($artikel->isi), 100) }}</p>
                 <p class="absolute md:text-sm top-0 right-0 md:static font-semibold text-center text-white bg-blue-500 rounded-xl p-3 min-w-max md:max-w-2 md:px-3 md:py-1 md:mt-2">{{ ucfirst($artikel->kategori) }}</p>
-                <a href=" dd{{ route('user.artikel.show', $artikel->slug) }}" class="text-blue-600 mt-3 inline-block">Baca selengkapnya</a>
+                <a href="{{ route('user.artikel.show', $artikel->slug) }}" class="text-blue-600 mt-3 inline-block">Baca selengkapnya</a>
             </div>
         </div>
         </a>

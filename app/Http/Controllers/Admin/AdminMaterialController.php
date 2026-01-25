@@ -33,7 +33,7 @@ class AdminMaterialController extends Controller
         $fileName = null;
         if($request->file) {
             $fileName = time() . '-' . $request->file->getClientOriginalName();
-            $request->file->move(public_path('materials'), $fileName);
+            $request->file->move(public_path('uploads/E-Book'), $fileName);
         }
 
         Material::create([
@@ -63,11 +63,11 @@ class AdminMaterialController extends Controller
 
         if($request->file) {
             if($material->file && file_exists(public_path('materials/'. $material->file))){
-                unlink(public_path('materials/'.$material->file));
+                unlink(public_path('uploads/E-Book/'.$material->file));
             }
 
             $fileName = time() . '-' . $request->file->getClientOriginalName();
-            $request->file->move(public_path('materials'), $fileName);
+            $request->file->move(public_path('uploads/E-Book'), $fileName);
 
             $material->file = $fileName;
         }

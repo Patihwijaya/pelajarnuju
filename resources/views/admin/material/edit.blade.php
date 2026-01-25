@@ -23,7 +23,7 @@
                     <label class="block font-semibold mb-1">File Saat Ini</label>
                     @if($material->file)
                         <p>
-                            <a href="{{ asset('materials/'.$material->file) }}" target="_blank">Lihat File</a>
+                            <a href="{{ asset('uploads/E-Book/'.$material->file) }}" target="_blank">Lihat File</a>
                         </p>
                     @else
                         <p>- Tidak ada file -</p>
