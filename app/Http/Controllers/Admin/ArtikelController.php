@@ -44,12 +44,12 @@ class ArtikelController extends Controller
             $namaFile = time() . '.' . $request->gambar->extension();
             $request->gambar->move(public_path('uploads/artikel'), $namaFile);
         }
-
+        
         Artikel::create([
             'admin_id' => Auth::guard('admin')->id(),
             'judul' => $request->judul,
             'slug' => Str::slug($request->judul),
-            'isi' => $request->isi,
+            'isi' => trim($request->$isi, '"'),
             'kategori' => $request->kategori,
             'penulis' => $request->penulis,
             'gambar' => $namaFile,
@@ -97,7 +97,7 @@ class ArtikelController extends Controller
         $artikel->update([
             'judul' => $request->judul,
             'slug' => Str::slug($request->judul),
-            'isi' => $request->isi,
+            'isi' => trim($request->isi, '"'),
             'kategori' => $request->kategori,
             'penulis' => $request->penulis,
             'gambar' => $namaFile,

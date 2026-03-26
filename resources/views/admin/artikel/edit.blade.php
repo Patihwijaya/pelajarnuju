@@ -33,7 +33,7 @@
 
         <div class="mb-4">
             <label class="block font-semibold mb-1">Isi Artikel</label>
-            <textarea name="isi" rows="8" class="w-full border rounded-lg p-2">{{ old('isi', $artikel->isi) }}</textarea>
+            <textarea name="isi" id="editor" rows="8" class="w-full border rounded-lg p-2">{{ old('isi', $artikel->isi) }}</textarea>
         </div>
 
         <div class="mb-4">
@@ -55,4 +55,19 @@
         </div>
     </form>
 </div>
+<script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+
+<script>
+    CKEDITOR.replace('editor', {
+        height: 300,
+
+        toolbar: [
+            { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike'] },
+            { name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Blockquote'] },
+            { name: 'styles', items: ['Format'] },
+            { name: 'insert', items: ['Link', 'Image', 'Table'] },
+            { name: 'tools', items: ['Maximize'] }
+        ]
+    });
+</script>
 </x-layouts.admin>

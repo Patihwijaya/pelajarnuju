@@ -12,7 +12,9 @@
         @if ($banner)
         <section class="w-full bg-white rounded-3xl overflow-hidden">
             <a href="{{ route('user.artikel.show', $banner->slug) }}">
-                <img src="{{ asset('uploads/artikel/' . $banner->gambar) }}" class="w-full rounded">
+                <div class="w-full h-90 overflow-hidden">
+                    <img src="{{ asset('uploads/artikel/' . $banner->gambar) }}" class="w-full rounded object-cover">
+                </div>
                 <div class="p-5">
                     <div class="flex gap-3 items-center">
                         <p class="text-sm bg-green-200 text-green-800 font-bold px-6 py-1 rounded-full w-fit">{{ $banner->kategori }}</p>
@@ -20,7 +22,7 @@
                         <p class="text-sm text-gray-500">{{ $banner->created_at->diffForHumans()}}</p>
                     </div>
                     <h1 class="text-sm md:text-2xl font-semibold group-hover:text-green-600">{{ $banner->judul }}</h1>
-                    <p class="mt-2 text-sm md:text-md text-gray-700 line-clamp-3">{{ \Illuminate\Support\Str::limit($banner->isi, 50) }}</p>
+                    <p class="mt-2 text-sm md:text-md text-gray-700 line-clamp-3">{!! \Illuminate\Support\Str::limit($banner->isi, 90) !!}</p>
                     <a href="{{ route('user.artikel.show', $banner->id) }}" class="text-blue-600 mt-3 inline-block">Baca Selengkapnya</a>
                 </div>
             </a>

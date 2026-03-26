@@ -1,43 +1,52 @@
 <x-layouts.app-user title="Beranda">
-    <div class="w-full flex flex-wrap gap-5 border-2 p-3 border-gray-300 rounded-xl">
-        <a href="/ibadah">
-            <div class="flex flex-wrap justify-center w-25 h-30 rounded-xl py-3 px-3 hover:shadow-2xl text-center">
-                <div class="bg-gray-300 rounded-full w-15 h-15 mx-auto flex items-center justify-center">
-                    <p class="text-3xl">🕌</p>
+    <div class="w-full flex flex-wrap gap-5 border-2 justify-center py-10 border-gray-300 rounded-xl">
+        {{-- card waktu ibadah --}}
+        <div class="w-[200px] md:w-[350px] rounded-2xl overflow-hidden relative shadow-lg hover:shadow-2xl">
+            <a href="/ibadah">
+                <img src="{{ asset('asset/jam.jpg') }}" alt="" class="object-cover w-full h-[204px]">
+                <div class="flex flex-col gap-3 px-[10px] py-[10px]">
+                    <h3 class="text-lg md:text-2xl font-bold">Waktu Sholat 5 Waktu</h3>
+                    <p class="text-base">Waktu Sholat 5 Waktu: Dzuhur, Ashr, Magrib, Isya, Subuh</p>
+                    <a href="/ibadah" class="px-2 py-2 bg-[#EC7924] rounded-full text-center text-white font-bold">Selengkapnya</a>
+                    <p class="px-5 py-2 bg-[#3BD59C] text-[#083C30] font-bold text-base text-center absolute top-5 right-5 rounded-2xl">UMUM</p>
                 </div>
-                <p class="font-semibold">Ibadah</p>
-            </div>
-        </a>
-
-        <a href="/pengajuanSkIpnu">
-            <div class="flex flex-wrap justify-center w-25 h-30 rounded-xl py-3 px-3 hover:shadow-2xl text-center">
-                <div class="bg-gray-300 rounded-full w-15 h-15 mx-auto flex items-center justify-center">
-                    <p class="text-3xl">
-                        <svg class="w-10 h-10 text-black" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                            <path fill-rule="evenodd" d="M6 2a2 2 0 0 0-2 2v15a3 3 0 0 0 3 3h12a1 1 0 1 0 0-2h-2v-2h2a1 1 0 0 0 1-1V4a2 2 0 0 0-2-2h-8v16h5v2H7a1 1 0 1 1 0-2h1V2H6Z" clip-rule="evenodd"/>
-                        </svg>
-                    </p>
+            </a>
+        </div>
+        {{-- card pengajuan surat pengesahan IPNU --}}
+        <div class="w-[200px] md:w-[350px] rounded-2xl overflow-hidden relative shadow-lg hover:shadow-2xl">
+            <a href="/pengajuanSkIpnu">
+                <img src="{{ asset('asset/foto ipnu.jpeg') }}" alt="" class="object-cover w-full h-[204px]">
+                <div class="flex flex-col gap-3 px-[10px] py-[10px]">
+                    <h3 class="text-lg md:text-2xl font-bold">Pengajuan Surat Pengesahan</h3>
+                    <p class="text-base">Tempat Pengajuan Surat Pengesaha (SP) untuk PAC, PR, dan PK IPNU Se-Jakarta Utara</p>
+                    <a href="/pengajuanSkIpnu" class="px-2 py-2 bg-[#EC7924] rounded-full text-center text-white font-bold">Selengkapnya</a>
+                    <p class="px-5 py-2 bg-[#3BD59C] text-[#083C30] font-bold text-base text-center absolute top-5 right-5 rounded-2xl">IPNU</p>
                 </div>
-                <p class="font-semibold">Pengajuan SK IPNU</p>
-            </div>
-        </a>
-
-        <a href="/pengajuanSkIppnu">
-            <div class="flex flex-wrap justify-center w-25 h-30 rounded-xl py-3 px-3 hover:shadow-2xl text-center">
-                <div class="bg-gray-300 rounded-full w-15 h-15 mx-auto flex items-center justify-center">
-                    <p class="text-3xl">📕</p>
+            </a>
+        </div>
+        {{-- card pengajuan surat pengesahan IPPNU --}}
+        <div class="w-[200px] md:w-[350px] rounded-2xl overflow-hidden relative shadow-lg hover:shadow-2xl">
+            <a href="/pengajuanSkIppnu">
+                <img src="{{ asset('asset/foto ippnu.jpeg') }}" alt="" class="object-cover w-full h-[204px]">
+                <div class="flex flex-col gap-3 px-[10px] py-[10px]">
+                    <h3 class="text-lg md:text-2xl font-bold">Pengajuan Surat Pengesahan</h3>
+                    <p class="text-base">Tempat Pengajuan Surat Pengesaha (SP) untuk PAC, PR, dan PK IPPNU Se-Jakarta Utara</p>
+                    <a href="/pengajuanSkIppnu" class="px-2 py-2 bg-[#EC7924] rounded-full text-center text-white font-bold">Selengkapnya</a>
+                    <p class="px-5 py-2 bg-[#3BD59C] text-[#083C30] font-bold text-base text-center absolute top-5 right-5 rounded-2xl">IPPNU</p>
                 </div>
-                <p class="font-semibold">Pengajuan SK IPPNU</p>
-            </div>
-        </a>
-
-        <a href="/material">
-            <div class="flex flex-wrap justify-center w-25 h-30 rounded-xl py-3 px-3 hover:shadow-2xl text-center">
-                <div class="bg-gray-300 rounded-full w-15 h-15 mx-auto flex items-center justify-center">
-                    <p class="text-3xl">📚</p>
+            </a>
+        </div>
+        {{-- card E-book --}}
+        <div class="w-[200px] md:w-[350px] rounded-2xl overflow-hidden relative shadow-lg hover:shadow-2xl">
+            <a href="/material">
+                <img src="{{ asset('asset/buku.jpg') }}" alt="" class="object-cover w-full h-[204px]">
+                <div class="flex flex-col gap-3 px-[10px] py-[10px]">
+                    <h3 class="text-lg md:text-2xl font-bold">E-Book</h3>
+                    <p class="text-base">Tempat Bacaan E-Book Gratis yang telah disediakan oleh PC IPNU IPPNU Jakarta Utara</p>
+                    <a href="/material" class="px-2 py-2 bg-[#EC7924] rounded-full text-center text-white font-bold">Selengkapnya</a>
+                    <p class="px-5 py-2 bg-[#3BD59C] text-[#083C30] font-bold text-base text-center absolute top-5 right-5 rounded-2xl">UMUM</p>
                 </div>
-                <p class="font-semibold">E-Book</p>
-            </div>
-        </a>
+            </a>
+        </div>
     </div>
 </x-layouts.app>

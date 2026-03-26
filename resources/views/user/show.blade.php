@@ -8,7 +8,7 @@
     <meta property="og:description" content="{{ Str::limit(strip_tags($artikels->isi), 150) }}">
     <meta property="og:type" content="artikels">
     <meta property="og:url" content="{{ $shareUrl }}">
-    <meta property="og:image" content="{{ $shareImage }}">
+    <meta property="og:image" content="{{ asset('uploads/artikel/'.$artikels->gambar) }}">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
 
@@ -68,9 +68,30 @@
         </a>
     </div>
     <!-- Jika konten memiliki paragraf, buat baris baru per paragraf -->
-    @foreach(explode("\n", $artikels->isi) as $paragraph)
-        <p class="mb-4 mt-5">{{ $paragraph }}</p>
-    @endforeach
+    @if(strip_tags($artikels->isi) === $artikels->isi)
+        {{-- FORMAT LAMA --}}
+        <div class="mt-8 text-gray-700 leading-relaxed">
+            @foreach(explode("\n", $artikels->isi) as $paragraph)
+                {{-- Mencegah pencetakan tag <p> kosong jika ada banyak enter --}}
+                @if(trim($paragraph) !== '') 
+                    <p class="mb-4">{{ $paragraph }}</p>
+                @endif
+            @endforeach
+        </div>
+    @else
+        {{-- FORMAT BARU --}}
+        <div class="mt-8 text-gray-700 leading-relaxed 
+                    [&>h2]:text-2xl [&>h2]:font-bold [&>h2]:mt-8 [&>h2]:mb-4 
+                    [&>h3]:text-xl [&>h3]:font-bold [&>h3]:mt-6 [&>h3]:mb-3
+                    [&>p]:mb-4 
+                    [&>ul]:list-disc [&>ul]:pl-5 [&>ul]:mb-4 [&>ul>li]:mb-1
+                    [&>ol]:list-decimal [&>ol]:pl-5 [&>ol]:mb-4 [&>ol>li]:mb-1
+                    [&>blockquote]:border-l-4 [&>blockquote]:border-gray-300 [&>blockquote]:pl-4 [&>blockquote]:italic [&>blockquote]:text-gray-600 [&>blockquote]:my-4">
+            {!! $artikels->isi !!}
+            
+        </div>
+    @endif
+
 
     <p class="mb-4 text-gray-500">Penulis: {{ $artikels->penulis }}</p>
     <a href="/artikel" class="text-blue-500 hover:underline">Kembali ke daftar artikel</a>
