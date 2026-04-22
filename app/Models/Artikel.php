@@ -20,4 +20,9 @@ class Artikel extends Model
         'penulis',
         'gambar',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(user::class);
+    }
 }

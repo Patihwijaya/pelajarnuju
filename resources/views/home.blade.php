@@ -12,7 +12,7 @@
         @if ($banner)
         <section class="w-full bg-white rounded-3xl overflow-hidden">
             <a href="{{ route('user.artikel.show', $banner->slug) }}">
-                <div class="w-full h-90 overflow-hidden">
+                <div class="w-full h-30 md:h-90 overflow-hidden">
                     <img src="{{ asset('uploads/artikel/' . $banner->gambar) }}" class="w-full rounded object-cover">
                 </div>
                 <div class="p-5">

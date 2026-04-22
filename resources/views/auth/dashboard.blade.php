@@ -48,5 +48,16 @@
                 </div>
             </a>
         </div>
+        <div class="w-[200px] md:w-[350px] rounded-2xl overflow-hidden relative shadow-lg hover:shadow-2xl">
+            <a href="/material">
+                <img src="{{ asset('asset/buku.jpg') }}" alt="" class="object-cover w-full h-[204px]">
+                <div class="flex flex-col gap-3 px-[10px] py-[10px]">
+                    <h3 class="text-lg md:text-2xl font-bold">Buat Artikel</h3>
+                    <p class="text-base">Tempat untuk membuat artikel dengan kategori tertentu</p>
+                    <a href="/material" class="px-2 py-2 bg-[#EC7924] rounded-full text-center text-white font-bold">Selengkapnya</a>
+                    <p class="px-5 py-2 bg-[#3BD59C] text-[#083C30] font-bold text-base text-center absolute top-5 right-5 rounded-2xl">UMUM</p>
+                </div>
+            </a>
+        </div>
     </div>
 </x-layouts.app>

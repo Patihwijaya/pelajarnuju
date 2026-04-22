@@ -60,4 +60,8 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(\App\Models\Material::class, 'material_user', 'user_id', 'material_id')->withTimestamps();
     }
+    public function artikels()
+    {
+        return $this->hasMany(Artikel::class);
+    }
 }

@@ -49,7 +49,7 @@ class ArtikelController extends Controller
             'admin_id' => Auth::guard('admin')->id(),
             'judul' => $request->judul,
             'slug' => Str::slug($request->judul),
-            'isi' => trim($request->$isi, '"'),
+            'isi' => trim($request->isi, '"'),
             'kategori' => $request->kategori,
             'penulis' => $request->penulis,
             'gambar' => $namaFile,
