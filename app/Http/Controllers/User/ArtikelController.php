@@ -23,7 +23,7 @@ class ArtikelController extends Controller
         CarbonInterval::setLocale('id');
 
         $artikels = Artikel::where('slug', $slug)->firstOrFail();
-        // $artikels->increment('lihats');
+        $artikels->increment('lihats');
         $sessionKey = $artikels->id;
         $shareUrl = url()->current();
         $shareText = $artikels->judul;

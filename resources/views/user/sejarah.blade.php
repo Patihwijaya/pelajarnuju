@@ -5,17 +5,16 @@
             <!-- TITLE -->
             <div class="text-center mb-6">
             <h1 class="text-3xl font-semibold text-gray-800 dark:text-white">
-                Ikatan Pelajar Nahdlatul Ulama
+                Napak Tilas Pergerakan
             </h1>
             <p class="text-gray-500 dark:text-white mt-2 text-sm leading-relaxed">
-                Badan otonom di bawah naungan Nahdlatul Ulama yang berfokus pada pembinaan,
-                kaderisasi, dan penguatan nilai-nilai Ahlussunnah wal Jama'ah (Aswaja).
+                Mengenal lebih dekat sejarah panjang ikatan Pimpinan Cabang IPNU IPPNU Kota Administrasi Jakarta Utara.
             </p>
             </div>
         
             <!-- TAB SWITCH -->
             <div class="w-full max-w-3xl mx-auto overflow-x-auto pb-4 custom-scrollbar">
-                <div class="flex gap-4 w-max px-2">
+                <div class="flex mx-auto gap-4 w-max px-2">
             
                     <button 
                         @click="tab = 'ipnu'"
@@ -226,11 +225,17 @@
             <div x-show="tab === 'pc'" x-transition>
                 @if($profil)
                     <div class="flex items-center space-x-4">
-                        <div>
+                        <div class="mb-5">
                             <h2 class="text-2xl font-bold">{{ $profil->judul }}</h2>
                         </div>
                     </div>
-                    <p class="mt-4 text-gray-700 text-justify">{!! nl2br(e($profil->text)) !!}</p>
+                    @foreach(explode("\n", $profil->text) as $isi)
+                        {{-- Mencegah pencetakan tag <p> kosong jika ada banyak enter --}}
+                        @if(trim($isi) !== '') 
+                            <p class="mb-4">{{ $isi }}</p>
+                        @endif
+                    @endforeach
+                    {{-- <p class="mt-4 text-gray-700 text-justify">{!! nl2br(e($profil->text)) !!}</p> --}}
                 @else
                     <p class="mt-4">Belum ada data .</p>
                 @endif

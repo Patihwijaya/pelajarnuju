@@ -17,7 +17,7 @@ class HomeController extends Controller
         CarbonInterval::setLocale('id');
 
         $totalUsers = User::count();
-        $totalArtikel = Artikel::orderBy('lihats', 'desc')->orderBy('created_at', 'desc')->get();
+        $artikelPopuler = Artikel::orderBy('lihats', 'desc')->orderBy('created_at', 'desc')->take(6)->get();
 
 
         $banner = Artikel::latest()->first();
@@ -28,12 +28,13 @@ class HomeController extends Controller
 
         $data = $artikel->merge($kegiatan);
 
-        return view('home', compact('totalArtikel', 'banner', 'artikel', 'kegiatan', 'data'));
+        return view('home', compact('totalArtikel', 'artikelPopuler' , 'banner', 'artikel', 'kegiatan', 'data'));
     }
 
     public function show($id)
     {
         $artikels = Artikel::findOrfail($id);
+        $artikels->increment('lihats');
         return view('user.show', compact('artikels'));
     }
 
@@ -62,5 +63,5 @@ class HomeController extends Controller
                     });
 
     return response()->json($hasil);
-}
+    }
 }

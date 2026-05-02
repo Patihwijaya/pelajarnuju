@@ -32,7 +32,7 @@ class AdsController extends Controller
     {
         $request->validate([
             'judul' => 'required',
-            'gambar' => 'image|mimes:png,jpg,jpeg|max:2048',
+            'gambar' => 'image|mimes:png,jpg,jpeg|max:10000',
             'expired_at' => 'required|date'
         ]);
 
@@ -77,7 +77,7 @@ class AdsController extends Controller
     {
         $request->validate([
             'judul' => 'required',
-            'gambar' => 'image|mimes:png,jpg,jpeg|max:2048',
+            'gambar' => 'image|mimes:png,jpg,jpeg|max:10000',
             'expired_at' => 'required|date',
             'link' => 'required|url'
         ]);

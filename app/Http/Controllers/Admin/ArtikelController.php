@@ -13,9 +13,36 @@ class ArtikelController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $artikels = Artikel::latest()->get();
+        // $artikels = Artikel::latest()->get();
+        // return view('admin.artikel.index', compact('artikels'));
+
+        $perPage = $request->input('per_page', 5);
+        $search = $request->input('search');
+        $kategori = $request->input('kategori');
+
+        $query = Artikel::query();
+
+        if ($kategori) {
+            $query->where('kategori', $kategori);
+        }
+        if ($search) {
+            $query->where(function($q) use ($search) {
+                $q->where('judul', 'like', "%{$search}%")
+                ->orWhere('penulis', 'like', "%{$search}%")
+                ->orWhere('kategori', 'like', "%{$search}%");
+            });
+        }
+
+        $artikels = $query->orderBy('created_at', 'desc')->paginate($perPage)->appends($request->query());
+
+        // JIKA INI REQUEST AJAX, KEMBALIKAN HANYA TABELNYA SAJA (TIDAK TERMASUK NAVBAR/SIDEBAR)
+        if ($request->ajax()) {
+            return view('admin.artikel.partials.table', compact('artikels'))->render();
+        }
+
+        // JIKA LOADING NORMAL, KEMBALIKAN HALAMAN UTUH
         return view('admin.artikel.index', compact('artikels'));
     }
 

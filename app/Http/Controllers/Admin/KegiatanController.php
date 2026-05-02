@@ -15,7 +15,8 @@ class KegiatanController extends Controller
 {
     public function index()
     {
-        $kegiatan = Kegiatan::latest()->get();
+        // $kegiatan = Kegiatan::latest()->get();
+        $kegiatan = Kegiatan::latest()->paginate(10);
         return view('admin.kegiatan.index', compact('kegiatan'));
     }
 
@@ -63,7 +64,7 @@ class KegiatanController extends Controller
             }
         }
 
-        return redirect()->route('admin.kegiatan.index')->with('succes', 'kegiatan berhasil ditambahlan');
+        return redirect()->route('admin.kegiatan.index')->with('success', 'kegiatan berhasil ditambahkan');
     }
 
     public function edit(Kegiatan $kegiatan)
@@ -116,7 +117,7 @@ class KegiatanController extends Controller
             }
         }
 
-        return redirect()->route('admin.kegiatan.index')->with('succes', 'kegiatan berhasil diubah');
+        return redirect()->route('admin.kegiatan.index')->with('success', 'kegiatan berhasil diubah');
     }
 
     public function destroy(Kegiatan $kegiatan)
@@ -134,6 +135,6 @@ class KegiatanController extends Controller
         }
 
         $kegiatan->delete();
-        return redirect()->route('admin.kegiatan.index')->with('succes', 'kegiatan berhasil dihapus');
+        return redirect()->route('admin.kegiatan.index')->with('success', 'kegiatan berhasil dihapus');
     }
 }

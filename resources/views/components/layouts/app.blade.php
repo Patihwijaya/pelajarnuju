@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="{{ asset('asset/logoPelajarnuju.png') }}" type="image/png">
+    <link rel="icon" href="{{ asset('asset/logo pelajarnuju putih.png') }}" type="image/png">
     <title>{{ $title ?? 'Website PC IPNU IPPNU' }}</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -47,6 +47,52 @@
                 Mohon tunggu...
             </p>
         </div>
+
+        @php
+    $ads = \App\Models\Ads::where('status', 1)
+    ->whereDate('expired_at', '>=', now())
+    ->latest()
+    ->get();
+@endphp
+
+@if($ads->count())
+    <div class="relative w-full aspect-[5/1] overflow-hidden mb-5 md:1">
+        <div id="carousel" class="flex transition-transform duration-1000">
+                @foreach ($ads as $ad)
+                    <div class="min-w-full">
+                        <a href="{{ route('ads.click', $ad->id) }}" target="_blank">
+                            @if ($ad->gambar)
+                                <img src="{{ asset('uploads/ads/'.$ad->gambar) }}" class="w-full h-auto object-cover object-center">
+                            @else
+                                <div class="bg-yellow-200 p-4 rounded shadow">
+                                    <h2 class="text-lg font-bold">{{ $ad->judul }}</h2>
+                                    <p>{{ $ad->deskripsi }}</p>
+                                </div>
+                            @endif
+                        </a>
+                    </div>
+                @endforeach
+            @if ($ads->count() > 0)
+                <div class="min-w-full">
+                    <a href="{{ route('ads.click', $ad->id) }}" target="_blank">
+                        @if ($ad->gambar)
+                            <img src="{{ asset('uploads/ads/'.$ads[0]->gambar) }}" class="w-full h-auto object-cover object-center">
+                        @else
+                            <div class="bg-yellow-200 p-4 rounded shadow">
+                                <h2 class="text-lg font-bold">{{ $ad->judul }}</h2>
+                                <p>{{ $ad->deskripsi }}</p>
+                            </div>
+                        @endif
+                    </a>
+                </div>
+            @endif
+        </div>
+    </div>
+@else
+    <div class="w-full h-30 rounded shadow bg-gray-400 flex flex-col items-center justify-center">
+        <p class="text-xl text-black font-bold">ini adalah iklan</p>
+    </div>
+@endif
 
         <style>
             /* Paksa sembunyikan jika JavaScript mati */

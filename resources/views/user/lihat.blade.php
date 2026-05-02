@@ -1,49 +1,4 @@
 <x-layouts.app title="Dokuementasi">
-    @php
-        $ads = \App\Models\Ads::where('status', 1)
-        ->whereDate('expired_at', '>=', now())
-        ->latest()
-        ->get();
-    @endphp
-    
-    @if($ads->count())
-        <div class="relative w-full aspect-[5/1] overflow-hidden mb-5">
-            <div id="carousel" class="flex transition-transform duration-1000">
-                    @foreach ($ads as $ad)
-                        <div class="min-w-full">
-                            <a href="{{ route('ads.click', $ad->id) }}" target="_blank">
-                                @if ($ad->gambar)
-                                    <img src="{{ asset('uploads/ads/'.$ad->gambar) }}" class="w-full h-48 object-cover object-center">
-                                @else
-                                    <div class="bg-yellow-200 p-4 rounded shadow">
-                                        <h2 class="text-lg font-bold">{{ $ad->judul }}</h2>
-                                        <p>{{ $ad->deskripsi }}</p>
-                                    </div>
-                                @endif
-                            </a>
-                        </div>
-                    @endforeach
-                @if ($ads->count() > 0)
-                    <div class="min-w-full">
-                        <a href="{{ route('ads.click', $ad->id) }}" target="_blank">
-                            @if ($ad->gambar)
-                                <img src="{{ asset('uploads/ads/'.$ads[0]->gambar) }}" class="w-full h-48 object-cover object-center">
-                            @else
-                                <div class="bg-yellow-200 p-4 rounded shadow">
-                                    <h2 class="text-lg font-bold">{{ $ad->judul }}</h2>
-                                    <p>{{ $ad->deskripsi }}</p>
-                                </div>
-                            @endif
-                        </a>
-                    </div>
-                @endif
-            </div>
-        </div>
-    @else
-        <div class="w-full h-30 rounded shadow bg-gray-400 flex flex-col items-center justify-center">
-            <p class="text-xl text-black font-bold">ini adalah iklan</p>
-        </div>
-    @endif
 <div class="w-full bg-white dark:bg-[#091413] shadow-lg rounded-2xl p-3 md:px-20">
 
 

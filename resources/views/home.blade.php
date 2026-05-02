@@ -1,105 +1,6 @@
 <x-layouts.app title="Pelajarnuju">
 
 @php
-    $ads = \App\Models\Ads::where('status', 1)
-    ->whereDate('expired_at', '>=', now())
-    ->latest()
-    ->get();
-@endphp
-
-@if($ads->count())
-    <div class="relative w-full aspect-[5/1] overflow-hidden mb-5 md:1">
-        <div id="carousel" class="flex transition-transform duration-1000">
-                @foreach ($ads as $ad)
-                    <div class="min-w-full">
-                        <a href="{{ route('ads.click', $ad->id) }}" target="_blank">
-                            @if ($ad->gambar)
-                                <img src="{{ asset('uploads/ads/'.$ad->gambar) }}" class="w-full h-48 object-cover object-center">
-                            @else
-                                <div class="bg-yellow-200 p-4 rounded shadow">
-                                    <h2 class="text-lg font-bold">{{ $ad->judul }}</h2>
-                                    <p>{{ $ad->deskripsi }}</p>
-                                </div>
-                            @endif
-                        </a>
-                    </div>
-                @endforeach
-            @if ($ads->count() > 0)
-                <div class="min-w-full">
-                    <a href="{{ route('ads.click', $ad->id) }}" target="_blank">
-                        @if ($ad->gambar)
-                            <img src="{{ asset('uploads/ads/'.$ads[0]->gambar) }}" class="w-full h-48 object-cover object-center">
-                        @else
-                            <div class="bg-yellow-200 p-4 rounded shadow">
-                                <h2 class="text-lg font-bold">{{ $ad->judul }}</h2>
-                                <p>{{ $ad->deskripsi }}</p>
-                            </div>
-                        @endif
-                    </a>
-                </div>
-            @endif
-        </div>
-    </div>
-@else
-    <div class="w-full h-30 rounded shadow bg-gray-400 flex flex-col items-center justify-center">
-        <p class="text-xl text-black font-bold">ini adalah iklan</p>
-    </div>
-@endif
-
-{{-- <div class="w-full inline md:grid md:grid-cols-2 mb-10">
-        @if ($banner)
-        <section class="w-full bg-white dark:bg-[#091413] overflow-hidden relative border-b-2 border-gray-400 border-dashed">
-            <a href="{{ route('user.artikel.show', $banner->slug) }}">
-                <div class="w-full h-40 md:h-90 overflow-hidden">
-                    <img src="{{ asset('uploads/artikel/' . $banner->gambar) }}" class="w-full h-48 object-cover object-center">
-                </div>
-                <div class="py-5">
-                    <h1 class="text-sm md:text-2xl font-bold text-justify group-hover:text-green-600">{{ $banner->judul }}</h1>
-                    <div class="mt-2 text-sm md:text-md text-gray-700 dark:text-gray-400 text-justify line-clamp-3">{!! \Illuminate\Support\Str::limit($banner->isi, 150) !!}</div>
-                    <div class="flex gap-3 items-center">
-                        <p class="text-sm bg-[#083C30] text-white font-bold px-6 py-1 w-fit absolute top-5 left-5">{{ $banner->kategori }}</p>
-                        <p class="text-sm text-gray-500">{{ $banner->created_at->translatedFormat('l, d M Y') }} |</p>
-                        <p class="text-sm text-gray-500">{{ $banner->created_at->diffForHumans()}}</p>
-                    </div>
-                    <a href="{{ route('user.artikel.show', $banner->id) }}" class="text-blue-600 mt-3 inline-block">Baca Selengkapnya</a>
-                </div>
-            </a>
-        </section>
-        @endif
-
-        <div class="flex flex-col">
-        @foreach($artikel as $a)
-            <a href="{{ route('user.artikel.show', $a->slug) }}">
-                <div class="flex w-full dark:bg-[#091413] hover:bg-gray-200 group bg-white border-b-2 border-gray-400 border-dashed my-2">
-                    <div class="w-full flex flex-col py-2">
-                        <div class="flex flex-col gap-2 pe-2">
-                            <p class="text-sm bg-[#083C30] text-white max-w-min px-6 py-1">{{ $a->kategori }}</p>
-                            <h1 class="text-sm font-bold text-justify group-hover:text-green-600">{{ $a->judul }}</h1>
-                            <div class="flex w-full gap-3">
-                                <p class="text-sm text-gray-500">{{ $a->created_at->translatedFormat('l, d M Y') }}</p>
-                                <p class="text-sm text-gray-500">{{ $a->created_at->diffForHumans()}}</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    @if($a->gambar)
-                        <div class="w-30 overflow-hidden">
-                                <img src="{{ asset('uploads/artikel/'.$a->gambar) }}" alt="{{ $a->judul }}" class="w-full aspect-square object-cover object-center">
-                        </div>
-                        
-                        @else
-                        <p>gambar tidak ada</p>
-                    @endif
-                </div>
-            </a>
-        @endforeach
-    </div>
-    <div class="col-start-1 col-end-3 w-full mt-10 order-2 text-center group ">
-        <p><a href="/artikel" class="text-blue-600 dark:text-white hover:bg-gray-200 bg-white dark:bg-gray-800 hover:dark:bg-gray-500 p-3 rounded-2xl hover:underline">Lihat Selengkapnya</a></p>
-    </div>
-</div> --}}
-
-@php
     // Membagi daftar artikel menjadi dua bagian untuk kolom kiri dan kanan
     $artikelKiri = $artikel->slice(0, 3); // Ambil 3 artikel pertama untuk Kiri
     $artikelTengahBawah = $artikel->slice(3, 2); // Ambil 2 artikel selanjutnya untuk Tengah
@@ -137,7 +38,7 @@
                     <a href="{{ route('user.artikel.show', $banner->slug) }}" class="block">
                         <!-- Gambar Banner: aspect-video memastikan gambar tidak melar -->
                         <div class="w-full aspect-video overflow-hidden rounded mb-4 relative">
-                            <img src="{{ asset('uploads/artikel/' . $banner->gambar) }}" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500">
+                            <img src="{{ asset('uploads/artikel/' . $banner->gambar) }}" alt="{{ $banner->judul}}" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500">
                             <!-- Kategori melayang di atas gambar -->
                             <span class="absolute top-4 left-4 bg-[#083C30] text-white text-xs font-bold px-4 py-1 rounded shadow">{{ $banner->kategori }}</span>
                         </div>
@@ -228,8 +129,8 @@
         @php
             $no = 1;
         @endphp
-        @foreach($totalArtikel as $artikel)
-            <a href="{{ route('user.artikel.show', $artikel->id) }}">
+        @foreach($artikelPopuler as $artikel)
+            <a href="{{ route('user.artikel.show', $artikel->slug) }}">
                 <div class="flex md:flex md:flex-row">
                     <div class="flex gap-3 py-1 w-full hover:bg-gray-200 group items-start">
                         <h1 class="font-bold text-lg text-[#3BD59C] italic">{{ $no++ }}</h1>
@@ -294,39 +195,14 @@
         </p>
         
         <div class="mt-10 flex items-center justify-center gap-x-2">
-            <a href="#" class="rounded-md bg-white px-3.5 py-2 text-sm font-semibold text-gray-900 shadow-sm transition hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
+            <a href="/login" class="rounded-md bg-white px-3.5 py-2 text-sm font-semibold text-gray-900 shadow-sm transition hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
                 Gabung Sekarang
             </a>
             
-            <a href="#" class="text-sm font-semibold leading-6 text-white transition hover:text-gray-300 flex items-center gap-1">
+            <a href="/sejarah" class="text-sm font-semibold leading-6 text-white transition hover:text-gray-300 flex items-center gap-1">
                 Pelajari Selengkapnya <span aria-hidden="true">&rarr;</span>
             </a>
         </div>
     </div>
 </section>
-
-<script>
-    const carousel = document.getElementById('carousel');
-    const slides = carousel.children;
-    let index = 0;
-    let slideCount = slides.length;
-
-    function nextSlide() {
-        index++;
-        carousel.style.transition = 'transform 1s ease-in-out';
-        carousel.style.transform = `translateX(-${index * 100}%)`;
-
-        // Reset tanpa animasi saat mencapai duplikasi slide pertama
-        if(index === slideCount - 1) {
-            setTimeout(() => {
-                carousel.style.transition = 'none';
-                index = 0;
-                carousel.style.transform = `translateX(0)`;
-            }, 1000); // harus sama dengan duration di CSS
-        }
-    }
-
-    setInterval(nextSlide, 5000); // slide otomatis setiap 3 detik
-</script>
-
 </x-layouts.app>

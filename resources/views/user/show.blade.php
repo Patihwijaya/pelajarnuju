@@ -19,51 +19,6 @@
     <meta name="twitter:image" content="{{ asset('uploads/artikel/'.$artikels->gambar) }}?v={{ $artikels->updated_at->timestamp }}">
     @endpush
 
-@php
-    $ads = \App\Models\Ads::where('status', 1)
-    ->whereDate('expired_at', '>=', now())
-    ->latest()
-    ->get();
-@endphp
-
-@if($ads->count())
-    <div class="relative w-full aspect-[5/1] overflow-hidden mb-5">
-        <div id="carousel" class="flex transition-transform duration-1000">
-                @foreach ($ads as $ad)
-                    <div class="min-w-full">
-                        <a href="{{ route('ads.click', $ad->id) }}" target="_blank">
-                            @if ($ad->gambar)
-                                <img src="{{ asset('uploads/ads/'.$ad->gambar) }}" class="w-full h-48 object-cover object-center">
-                            @else
-                                <div class="bg-yellow-200 p-4 rounded shadow">
-                                    <h2 class="text-lg font-bold">{{ $ad->judul }}</h2>
-                                    <p>{{ $ad->deskripsi }}</p>
-                                </div>
-                            @endif
-                        </a>
-                    </div>
-                @endforeach
-            @if ($ads->count() > 0)
-                <div class="min-w-full">
-                    <a href="{{ route('ads.click', $ad->id) }}" target="_blank">
-                        @if ($ad->gambar)
-                            <img src="{{ asset('uploads/ads/'.$ads[0]->gambar) }}" class="w-full h-48 object-cover object-center">
-                        @else
-                            <div class="bg-yellow-200 p-4 rounded shadow">
-                                <h2 class="text-lg font-bold">{{ $ad->judul }}</h2>
-                                <p>{{ $ad->deskripsi }}</p>
-                            </div>
-                        @endif
-                    </a>
-                </div>
-            @endif
-        </div>
-    </div>
-@else
-    <div class="w-full h-30 rounded shadow bg-gray-400 flex flex-col items-center justify-center">
-        <p class="text-xl text-black font-bold">ini adalah iklan</p>
-    </div>
-@endif
 <div class="w-full bg-white dark:bg-[#091413] shadow-lg rounded-2xl p-3 md:px-20">
     <p class="text-lg md:text-xl font-semibold text-center dark:text-[#3BD59C] rounded-xl p-3 min-w-max ">{{ ucfirst($artikels->kategori) }}</p>
     <h1 class="text-lg md:text-xl font-bold mb-4">{{ $artikels->judul }}</h1>
@@ -133,7 +88,7 @@
     <!-- Jika konten memiliki paragraf, buat baris baru per paragraf -->
     @if(strip_tags($artikels->isi) === $artikels->isi)
         {{-- FORMAT LAMA --}}
-        <div class="mt-8 text-gray-700 leading-relaxed">
+        <div class="mt-8 text-gray-700 dark:text-white leading-relaxed">
             @foreach(explode("\n", $artikels->isi) as $paragraph)
                 {{-- Mencegah pencetakan tag <p> kosong jika ada banyak enter --}}
                 @if(trim($paragraph) !== '') 
@@ -149,7 +104,7 @@
                     [&>p]:mb-4 
                     [&>ul]:list-disc [&>ul]:pl-5 [&>ul]:mb-4 [&>ul>li]:mb-1
                     [&>ol]:list-decimal [&>ol]:pl-5 [&>ol]:mb-4 [&>ol>li]:mb-1
-                    [&>blockquote]:border-l-4 [&>blockquote]:border-gray-300 [&>blockquote]:pl-4 [&>blockquote]:italic [&>blockquote]:text-gray-600 [&>blockquote]:my-4">
+                    [&>blockquote]:border-l-4 [&>blockquote]:border-gray-300 [&>blockquote]:pl-4 [&>blockquote]:italic [&>blockquote]:text-gray-600 dark:[&>blockquote]:text-white [&>blockquote]:my-4">
             {!! $artikels->isi !!}
         </div>
     @endif
