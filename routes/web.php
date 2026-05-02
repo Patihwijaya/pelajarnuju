@@ -40,6 +40,7 @@ use App\Http\Controllers\PengajuanSkIppnuController;
 
 
 
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/pilihlogin', function () {
@@ -55,6 +56,7 @@ Route::get('/artikel/{slug}', [UserArtikelController::class, 'show'])->name('use
 
 Route::get('/kegiatan', [UserKegiatanConroller::class, 'index'])->name('user.kegiatan.index');
 Route::get('/kegiatan/{id}', [UserKegiatanConroller::class, 'show'])->name('user.kegiatan.lihat');
+Route::get('/kegiatan/{id}/download-semua', [\App\Http\Controllers\User\KegiatanController::class, 'downloadSemua'])->name('kegiatan.download-semua');
 
 Route::get('/strukturIpnu', [UserStrukturIpnuController::class, 'index'])->name('user.strukturIpnu.index');
 
@@ -62,6 +64,12 @@ Route::get('/strukturIppnu', [UserStrukturIppnuController::class, 'index'])->nam
 
 Route::get('/kontak', [KontakController::class, 'form'])->name('kontak.form');
 Route::post('/kontak', [KontakController::class, 'store'])->name('kontak.store');
+
+Route::get('/faq', function(){
+    return view('user.faq', ['name' => 'Faq']);
+});
+
+Route::get('/api/live-search', [HomeController::class, 'liveSearch'])->name('live.search');
 
 Route::get('/ads/click/{id}', function ($id) {
     $ad = Ads::findOrFail($id);

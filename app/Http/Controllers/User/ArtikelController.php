@@ -5,6 +5,8 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Artikel;
+use Carbon\Carbon;
+use Carbon\CarbonInterval;
 
 class ArtikelController extends Controller
 {
@@ -17,6 +19,9 @@ class ArtikelController extends Controller
 
     public function show($slug)
     {
+        Carbon::setLocale('id');
+        CarbonInterval::setLocale('id');
+
         $artikels = Artikel::where('slug', $slug)->firstOrFail();
         // $artikels->increment('lihats');
         $sessionKey = $artikels->id;

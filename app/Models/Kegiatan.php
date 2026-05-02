@@ -15,6 +15,17 @@ class Kegiatan extends Model
         'admin_id',
         'judul',
         'deskripsi',
+        'lokasi',
+        'tanggal_acara',
         'gambar',
     ];
+
+    protected $casts = [
+        'tanggal_acara' => 'date',
+    ];
+
+    public function galleries()
+    {
+        return $this->hasMany(KegiatanGallery::class, 'kegiatan_id');
+    }
 }
