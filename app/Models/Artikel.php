@@ -11,14 +11,7 @@ class Artikel extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id',
-        'admin_id',
-        'judul',
-        'slug',
-        'kategori',
-        'isi',
-        'penulis',
-        'gambar',
+        'authorable_id', 'authorable_type', 'title', 'slug', 'content', 'kategori', 'gambar', 'status', 'penulis', 'verifier_id', 'verifier_type'
     ];
 
     public function user()

@@ -20,7 +20,7 @@
                         alt="Logo Pelajar NUJU Hijau" 
                         class="h-10 md:h-20 w-auto inline dark:hidden transition-opacity duration-300">
 
-                    <img src="{{ asset('asset/logo pelajarnuju Putih.png') }}" 
+                    <img src="{{ asset('asset/logo pelajarnuju putih.png') }}" 
                         alt="Logo Pelajar NUJU Putih" 
                         class="h-10 md:h-20 w-auto hidden dark:inline transition-opacity duration-300">
                 </div>

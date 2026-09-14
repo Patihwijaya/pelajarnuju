@@ -20,9 +20,16 @@ class AdminAuthController extends Controller
             'password' => 'required'
         ]);
 
-
         if (Auth::guard('admin')->attempt($credentials)) {
-            return redirect()->route('admin.dashboard');
+            $admin = Auth::guard('admin')->user();
+            
+            $request->session()->regenerate();
+
+            if ($admin->role === 'super_admin') {
+                return redirect()->route('admin.dashboard');
+            } else {
+                return redirect()->route('pac.dashboard');
+            }
         }
 
         return back()->with('error', 'Email atau password salah!');

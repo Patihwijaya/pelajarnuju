@@ -86,10 +86,10 @@
         
     </div>
     <!-- Jika konten memiliki paragraf, buat baris baru per paragraf -->
-    @if(strip_tags($artikels->isi) === $artikels->isi)
+    @if(strip_tags($artikels->content) === $artikels->content)
         {{-- FORMAT LAMA --}}
         <div class="mt-8 text-gray-700 dark:text-white leading-relaxed">
-            @foreach(explode("\n", $artikels->isi) as $paragraph)
+            @foreach(explode("\n", $artikels->content) as $paragraph)
                 {{-- Mencegah pencetakan tag <p> kosong jika ada banyak enter --}}
                 @if(trim($paragraph) !== '') 
                     <p class="mb-4">{{ $paragraph }}</p>
@@ -105,7 +105,7 @@
                     [&>ul]:list-disc [&>ul]:pl-5 [&>ul]:mb-4 [&>ul>li]:mb-1
                     [&>ol]:list-decimal [&>ol]:pl-5 [&>ol]:mb-4 [&>ol>li]:mb-1
                     [&>blockquote]:border-l-4 [&>blockquote]:border-gray-300 [&>blockquote]:pl-4 [&>blockquote]:italic [&>blockquote]:text-gray-600 dark:[&>blockquote]:text-white [&>blockquote]:my-4">
-            {!! $artikels->isi !!}
+            {!! $artikels->content !!}
         </div>
     @endif
 

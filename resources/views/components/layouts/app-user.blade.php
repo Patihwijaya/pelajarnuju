@@ -6,7 +6,15 @@
     <link rel="icon" href="{{ asset('asset/logoPelajarnuju.png') }}" type="image/png">
     <title>{{ $title ?? 'Website PC IPNU IPPNU' }}</title>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@ckeditor/ckeditor5-build-decoupled-document@41.4.2/build/ckeditor.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tinymce@6/tinymce.min.js" referrerpolicy="origin"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <style>
+        .ck-editor__editable {
+            min-height: 450px !important;
+        }
+    </style>
 </head>
 <body class="bg-gray-50 flex flex-col min-h-screen">
     <x-navbar />
@@ -31,5 +39,6 @@
         setInterval(updateClock, 1000);
         updateClock();
     </script>
+    @stack('scripts')
 </body>
 </html>
