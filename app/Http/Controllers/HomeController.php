@@ -17,13 +17,18 @@ class HomeController extends Controller
         CarbonInterval::setLocale('id');
 
         $totalUsers = User::count();
-        $artikelPopuler = Artikel::orderBy('lihats', 'desc')->orderBy('created_at', 'desc')->take(6)->get();
+        
+        // Ditambahkan filter status 'published' agar artikel pending tidak muncul ke publik
+        $artikelPopuler = Artikel::where('status', 'published')
+                                 ->orderBy('lihats', 'desc')
+                                 ->orderBy('created_at', 'desc')
+                                 ->take(6)
+                                 ->get();
 
+        $banner = Artikel::where('status', 'published')->latest()->first();
+        $artikel = Artikel::where('status', 'published')->latest()->skip(1)->take(8)->get();
 
-        $banner = Artikel::latest()->first();
-        $artikel = Artikel::latest()->skip(1)->take(8)->get();
-
-        $totalArtikel = Artikel::latest()->take(6)->get();
+        $totalArtikel = Artikel::where('status', 'published')->latest()->take(6)->get();
         $kegiatan = Kegiatan::latest()->take(3)->get();
 
         $data = $artikel->merge($kegiatan);
@@ -33,35 +38,34 @@ class HomeController extends Controller
 
     public function show($id)
     {
-        $artikels = Artikel::findOrfail($id);
+        // Pastikan hanya artikel published yang bisa dibuka oleh publik
+        $artikels = Artikel::where('status', 'published')->findOrFail($id);
         $artikels->increment('lihats');
         return view('user.show', compact('artikels'));
     }
 
-    
     public function liveSearch(Request $request)
     {
-    $keyword = $request->input('q');
+        $keyword = $request->input('q');
 
-    // Jika input kosong, kembalikan array kosong
-    if (empty($keyword)) {
-        return response()->json([]);
-    }
+        if (empty($keyword)) {
+            return response()->json([]);
+        }
 
-    // Cari artikel berdasarkan judul (dibatasi 5 hasil saja agar modal tidak kepanjangan)
-    $hasil = Artikel::where('judul', 'like', "%{$keyword}%")
-                    ->select('id', 'judul', 'slug') // Ambil kolom yang dibutuhkan saja
-                    ->limit(5)
-                    ->get()
-                    ->map(function($item) {
-                        return [
-                            'id' => $item->id,
-                            'judul' => $item->judul,
-                            // Sesuaikan URL ini dengan format URL artikelmu
-                            'url' => url('/artikel/' . $item->slug) 
-                        ];
-                    });
+        // Disesuaikan dengan kolom 'title' di database dan filter 'published'
+        $hasil = Artikel::where('status', 'published')
+                        ->where('title', 'like', "%{$keyword}%")
+                        ->select('id', 'title', 'slug')
+                        ->limit(5)
+                        ->get()
+                        ->map(function($item) {
+                            return [
+                                'id' => $item->id,
+                                'judul' => $item->title,
+                                'url' => url('/artikel/' . $item->slug) 
+                            ];
+                        });
 
-    return response()->json($hasil);
+        return response()->json($hasil);
     }
 }
