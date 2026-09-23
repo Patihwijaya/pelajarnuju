@@ -84,6 +84,12 @@
             tinymce.init({
                 selector: '#isi',
                 height: 500,
+                
+                // Konfigurasi tambahan agar responsif di layar HP
+                menubar: false,
+                toolbar_mode: 'sliding',
+                toolbar_sticky_offset: 70,
+                
                 plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
                 toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | removeformat',
                 automatic_uploads: true,

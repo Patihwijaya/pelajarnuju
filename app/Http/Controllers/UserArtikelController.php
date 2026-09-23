@@ -43,7 +43,8 @@ class UserArtikelController extends Controller
         $namaFile = null;
         if ($request->hasFile('gambar')) {
             $namaFile = time() . '.' . $request->gambar->extension();
-            $request->gambar->move(public_path('uploads/artikel'), $namaFile);
+            $destinationPath = base_path('../public_html/uploads/artikel');
+            $request->gambar->move($destinationPath, $namaFile);
         }
 
         Artikel::create([
@@ -91,7 +92,8 @@ class UserArtikelController extends Controller
         $namaFile = $artikel->gambar;
         if ($request->hasFile('gambar')) {
             $namaFile = time() . '.' . $request->gambar->extension();
-            $request->gambar->move(public_path('uploads/artikel'), $namaFile);
+            $destinationPath = base_path('../public_html/uploads/artikel');
+            $request->gambar->move($destinationPath, $namaFile);
         }
 
         $artikel->update([
