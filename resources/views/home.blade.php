@@ -148,6 +148,124 @@
         <p class="mt-2"><a href="/artikel" class="text-blue-600 hover:underline">Lihat Selengkapnya</a></p>
     </div>
 
+    <!-- ================= SEGMEN ACARA (EVENTS) ================= -->
+    <div class="mb-16">
+        <!-- Header Bagian Acara (Menyesuaikan style Dokumentasi) -->
+        <div class="flex items-center justify-between mb-8">
+            <h2 class="text-xl sm:text-2xl font-bold text-white relative pr-4 bg-[#0B1120] z-10">
+                Acara Terdekat
+            </h2>
+            <div class="flex-1 border-b border-dashed border-gray-600 relative top-[-2px]"></div>
+            <a href="{{ route('events.index') }}" class="text-sm font-semibold text-blue-400 hover:text-blue-300 ml-4 pl-4 bg-[#0B1120] z-10 transition-colors">
+                Lihat Semua Acara &rarr;
+            </a>
+        </div>
+
+        <!-- Grid Card Acara -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            @forelse($events as $event)
+                @php
+                    $totalRegistered = $event->registrations()->count();
+                    $isFull = $totalRegistered >= $event->max_participants;
+                    $isExpired = now() > $event->end_date;
+                    $percentage = $event->max_participants > 0 ? min(100, ($totalRegistered / $event->max_participants) * 100) : 0;
+                @endphp
+
+                <!-- Card Event -->
+                <article class="relative group flex flex-col bg-gray-800 rounded-2xl sm:rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden border border-gray-700">
+
+                    <a href="{{ route('events.show', $event->slug) }}" class="absolute inset-0 z-10 focus:outline-none" aria-label="Lihat detail {{ $event->title }}"></a>
+
+                    <!-- Area Gambar -->
+                    <div class="relative w-full aspect-[4/3] bg-gray-700 overflow-hidden">
+                        @if(isset($event->thumbnail) && $event->thumbnail)
+                            <img src="{{ asset('storage/' . $event->thumbnail) }}" alt="{{ $event->title }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        @else
+                            <div class="w-full h-full bg-gradient-to-br from-blue-600 to-indigo-900 flex items-center justify-center transition-transform duration-700 group-hover:scale-110">
+                                <svg class="w-12 h-12 text-white/20" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-5-7l-3 3.72L9 13l-3 4h12l-4-5.28z"/></svg>
+                            </div>
+                        @endif
+
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent pointer-events-none"></div>
+
+                        <!-- Badge Status Kiri Atas -->
+                        <div class="absolute top-4 left-4 z-20">
+                            @if($isFull)
+                                <span class="inline-flex items-center px-3 py-1.5 rounded-xl text-[10px] font-bold shadow-lg backdrop-blur-md bg-red-500/90 text-white border border-red-400/50">
+                                    Kuota Penuh
+                                </span>
+                            @elseif($isExpired)
+                                <span class="inline-flex items-center px-3 py-1.5 rounded-xl text-[10px] font-bold shadow-lg backdrop-blur-md bg-gray-600/90 text-white border border-gray-500/50">
+                                    Ditutup
+                                </span>
+                            @else
+                                <span class="inline-flex items-center px-3 py-1.5 rounded-xl text-[10px] font-bold shadow-lg backdrop-blur-md bg-green-500/90 text-white border border-green-400/50">
+                                    Pendaftaran Dibuka
+                                </span>
+                            @endif
+                        </div>
+
+                        <!-- Badge Kategori Kanan Atas -->
+                        @if(isset($event->category))
+                            <div class="absolute top-4 right-4 z-20">
+                                <span class="inline-flex items-center px-3 py-1 rounded-full bg-black/40 backdrop-blur-sm border border-white/20 text-white text-[10px] font-black uppercase tracking-widest shadow-sm">
+                                    {{ $event->category }}
+                                </span>
+                            </div>
+                        @endif
+
+                        <!-- Info Waktu & Lokasi Overlay -->
+                        <div class="absolute bottom-0 left-0 w-full p-4 z-20 pointer-events-none">
+                            <div class="flex flex-wrap items-center text-gray-300 text-[10px] font-medium mb-1.5 gap-x-2 gap-y-1">
+                                <span class="flex items-center bg-black/50 px-2 py-1 rounded backdrop-blur-sm border border-white/10">
+                                    <svg class="w-3 h-3 mr-1 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                    {{ $event->start_date->format('d F Y') }}
+                                </span>
+                                <span class="flex items-center bg-black/50 px-2 py-1 rounded backdrop-blur-sm border border-white/10 truncate max-w-[120px]">
+                                    <svg class="w-3 h-3 mr-1 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.243-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                    {{ Str::limit($event->location, 12) }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Konten Body -->
+                    <div class="p-5 bg-gray-800 flex-1 flex flex-col">
+                        <h3 class="text-lg font-bold text-white leading-snug line-clamp-2 mb-2 group-hover:text-blue-400 transition-colors">
+                            {{ $event->title }}
+                        </h3>
+                        <p class="text-xs text-gray-400 line-clamp-2 leading-relaxed">
+                            {{ strip_tags($event->description) }}
+                        </p>
+                        <div class="flex-1"></div>
+                    </div>
+
+                    <!-- Footer Card -->
+                    <div class="px-5 py-4 bg-gray-800 border-t border-gray-700 flex justify-between items-center z-20">
+                        <div class="w-2/3 pr-4">
+                            <div class="flex justify-between items-end text-[10px] mb-1">
+                                <span class="font-bold text-gray-400 uppercase tracking-wider">Pendaftar</span>
+                                <span class="font-bold text-white">{{ $totalRegistered }} <span class="text-gray-500">/ {{ $event->max_participants }}</span></span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-1.5 overflow-hidden">
+                                <div class="bg-blue-500 h-1.5 rounded-full transition-all duration-1000 ease-out" style="width: {{ $percentage }}%"></div>
+                            </div>
+                        </div>
+                        
+                        <a href="{{ route('events.show', $event->slug) }}" class="inline-flex justify-center items-center px-3 py-1.5 text-xs font-bold rounded-lg text-white bg-blue-600 group-hover:bg-blue-500 shadow-md transition-all">
+                            Detail
+                        </a>
+                    </div>
+                </article>
+            @empty
+                <!-- State jika belum ada Event -->
+                <div class="col-span-full bg-gray-800/50 rounded-2xl p-8 text-center border border-gray-700">
+                    <p class="text-gray-400 text-sm">Belum ada acara terdekat saat ini.</p>
+                </div>
+            @endforelse
+        </div>
+    </div>
+
 
     <!-- ================= DOKUMENTASI KEGIATAN ================= -->
     <div class="mt-8">

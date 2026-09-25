@@ -7,7 +7,8 @@ use App\Models\User;
 use App\Models\Artikel;
 use Carbon\Carbon;
 use Carbon\CarbonInterval;
-use App\Models\kegiatan;
+use App\Models\Kegiatan;
+use App\Models\Event;
 
 class HomeController extends Controller
 {
@@ -31,9 +32,11 @@ class HomeController extends Controller
         $totalArtikel = Artikel::where('status', 'published')->latest()->take(6)->get();
         $kegiatan = Kegiatan::latest()->take(3)->get();
 
+        $events = Event::latest()->take(3)->get();
+
         $data = $artikel->merge($kegiatan);
 
-        return view('home', compact('totalArtikel', 'artikelPopuler' , 'banner', 'artikel', 'kegiatan', 'data'));
+        return view('home', compact('totalArtikel', 'artikelPopuler' , 'banner', 'artikel', 'kegiatan', 'data', 'events'));
     }
 
     public function show($id)

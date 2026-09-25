@@ -68,6 +68,7 @@
             
                 <a href="/artikel" class="hover:text-[#083C30] transition-colors">Berita</a>
                 <a href="/kegiatan" class="hover:text-[#083C30] transition-colors">Dokumentasi</a>
+                <a href="/events" class="hover:text-[#083C30] transition-colors">Acara</a>
                 <a href="/faq" class="hover:text-[#083C30] transition-colors">FAQ</a>
                 <a href="/kontak" class="hover:text-[#083C30] transition-colors">Kontak</a>
             </div>
@@ -281,7 +282,7 @@
                                                     alt="Logo Pelajar NUJU Hijau" 
                                                     class="h-10 w-auto inline dark:hidden transition-opacity duration-300">
                             
-                                                <img src="{{ asset('asset/logo pelajarnuju Putih.png') }}" 
+                                                <img src="{{ asset('asset/logo pelajarnuju putih.png') }}" 
                                                     alt="Logo Pelajar NUJU Putih" 
                                                     class="h-10 w-auto hidden dark:inline transition-opacity duration-300">
                                             </div>
@@ -361,6 +362,13 @@
                                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m3 16 5-7 6 6.5m6.5 2.5L16 13l-4.286 6M14 10h.01M4 19h16a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1Z"/>
                                                 </svg>                                                  
                                                 <span class="font-semibold group-hover:text-green-600">Dokumentasi</span>
+                                            </a>
+                                            
+                                            <a href="/events" class="flex items-center gap-4 px-4 py-3 text-gray-700 dark:text-white transition-colors rounded-xl hover:bg-gray-50 hover:text-green-600 group">
+                                                <svg class="w-6 h-6 group-hover:text-green-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 10h16m-8-3V4M7 7V4m10 3V4M5 20h14a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1Zm3-7h.01v.01H8V13Zm4 0h.01v.01H12V13Zm4 0h.01v.01H16V13Zm-8 4h.01v.01H8V17Zm4 0h.01v.01H12V17Zm4 0h.01v.01H16V17Z"/>
+                                                </svg>
+                                                <span class="font-semibold group-hover:text-green-600">Acara</span>
                                             </a>
                                             
                                             <a href="/faq" class="flex items-center gap-4 px-4 py-3 text-gray-700 dark:text-white transition-colors rounded-xl hover:bg-gray-50 hover:text-green-600 group">

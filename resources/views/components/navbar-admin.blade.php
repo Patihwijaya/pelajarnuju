@@ -68,6 +68,7 @@
                         @if(Auth::guard('admin')->user()->isSuperAdmin())
                             <li><a href="{{ route('admin.admins.index') }}" class="block px-3 py-1.5 rounded hover:bg-gray-700">Admin PC & PAC</a></li>
                             <li><a href="{{ route('admin.ads.index') }}" class="block px-3 py-1.5 rounded hover:bg-gray-700">Ads (Iklan)</a></li>
+                            <li><a href="{{ route('admin.events.index') }}" class="block px-3 py-1.5 rounded hover:bg-gray-700">Events</a></li>
                             <li><a href="{{ route('admin.materials.index') }}" class="block px-3 py-1.5 rounded hover:bg-gray-700">Materi</a></li>
                         @endif
                     </ul>
